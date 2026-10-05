@@ -1,0 +1,443 @@
+{
+  "node_counts": {
+    "cypher": "MATCH (n) RETURN labels(n)[0] AS label, count(*) AS n ORDER BY n DESC",
+    "rows": [
+      {
+        "label": "Clause",
+        "n": 99
+      },
+      {
+        "label": "Person",
+        "n": 35
+      },
+      {
+        "label": "Article",
+        "n": 18
+      },
+      {
+        "label": "Substance",
+        "n": 15
+      },
+      {
+        "label": "Case",
+        "n": 14
+      },
+      {
+        "label": "Crime",
+        "n": 13
+      },
+      {
+        "label": "Location",
+        "n": 6
+      }
+    ]
+  },
+  "relationship_counts": {
+    "cypher": "MATCH ()-[r]->() RETURN type(r) AS rel, count(*) AS n ORDER BY n DESC",
+    "rows": [
+      {
+        "rel": "MENTIONS",
+        "n": 169
+      },
+      {
+        "rel": "HAS_CLAUSE",
+        "n": 99
+      },
+      {
+        "rel": "INVOLVED_IN",
+        "n": 43
+      },
+      {
+        "rel": "INVOLVES",
+        "n": 25
+      },
+      {
+        "rel": "CHARGED_WITH",
+        "n": 18
+      },
+      {
+        "rel": "DEFINES",
+        "n": 13
+      },
+      {
+        "rel": "LOCATED_IN",
+        "n": 13
+      }
+    ]
+  },
+  "bridge_count": {
+    "cypher": "MATCH (:Person)-[:INVOLVED_IN]->(:Case)-[:CHARGED_WITH]->(:Crime)<-[:DEFINES]-(:Article) RETURN count(*) AS paths",
+    "rows": [
+      {
+        "paths": 63
+      }
+    ]
+  },
+  "broken_bridges": {
+    "cypher": "MATCH (k:Case) WHERE NOT (k)-[:CHARGED_WITH]->() RETURN k.name AS name, k.doc_id AS doc_id ORDER BY doc_id",
+    "rows": [
+      {
+        "name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      }
+    ]
+  },
+  "substances": {
+    "cypher": "MATCH (s:Substance) RETURN s.name AS name ORDER BY toLower(s.name)",
+    "rows": [
+      {
+        "name": "Amphetamine"
+      },
+      {
+        "name": "chất ma túy"
+      },
+      {
+        "name": "Cocaine"
+      },
+      {
+        "name": "côca"
+      },
+      {
+        "name": "cần sa"
+      },
+      {
+        "name": "etomidate"
+      },
+      {
+        "name": "Heroine"
+      },
+      {
+        "name": "Ketamine"
+      },
+      {
+        "name": "ma túy"
+      },
+      {
+        "name": "ma túy tổng hợp"
+      },
+      {
+        "name": "MDMA"
+      },
+      {
+        "name": "Methamphetamine"
+      },
+      {
+        "name": "thuốc lắc"
+      },
+      {
+        "name": "thuốc phiện"
+      },
+      {
+        "name": "XLR-11"
+      }
+    ]
+  },
+  "blank_charges": {
+    "cypher": "MATCH (p:Person)-[r:INVOLVED_IN]->(k:Case) WHERE coalesce(r.charge, '') = '' RETURN p.name AS person, r.role AS role, k.name AS case_name, k.doc_id AS doc_id ORDER BY doc_id, person",
+    "rows": [
+      {
+        "person": "Dương Văn Biết",
+        "role": "người liên quan",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Dương Văn Lương",
+        "role": "người liên quan",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Lê Văn Đông",
+        "role": "bị can",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Nguyễn Thị Mai Anh",
+        "role": "bị can",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Nguyễn Thị Thu Hoài",
+        "role": "cán bộ",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Nguyễn Văn Quang",
+        "role": "cán bộ",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Trần Văn Trường",
+        "role": "người liên quan",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "Cao Thị Bích Hằng",
+        "role": "người liên quan",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Nguyễn Thị Mai Anh",
+        "role": "người liên quan",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Ngô Việt Dũng",
+        "role": "người liên quan",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Trần Quốc An",
+        "role": "người liên quan",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      }
+    ]
+  },
+  "mdma_cases": {
+    "cypher": "MATCH (k:Case)-[r:INVOLVES]->(:Substance {name:'MDMA'}) OPTIONAL MATCH (p:Person)-[:INVOLVED_IN]->(k) RETURN k.name AS case_name, k.doc_id AS doc_id, r.amount AS amount, collect(DISTINCT p.name) AS people ORDER BY doc_id, case_name",
+    "rows": [
+      {
+        "case_name": "Vụ vận chuyển ma túy từ Đức về Việt Nam",
+        "doc_id": "news-100260917203001265",
+        "amount": "9.6kg",
+        "people": [
+          "Nguyễn Tiến Đạt",
+          "Cái Quang Huy"
+        ]
+      },
+      {
+        "case_name": "Vụ góp tiền mua ma túy tại Hà Nội",
+        "doc_id": "news-100260918080821054",
+        "amount": "5 viên",
+        "people": [
+          "Lê Minh Thành",
+          "Kim Xuân Tuấn",
+          "Trịnh Vũ Kiên",
+          "Nguyễn Quang Hưng"
+        ]
+      },
+      {
+        "case_name": "Vụ vận chuyển ma túy của Cái Quang Huy",
+        "doc_id": "news-100260918080821054",
+        "amount": "9,6kg",
+        "people": [
+          "Cái Quang Huy"
+        ]
+      },
+      {
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645",
+        "amount": "",
+        "people": [
+          "Dương Văn Biết",
+          "Trần Văn Trường",
+          "Lê Văn Đông",
+          "Dương Văn Lương",
+          "Bùi Thị Thanh Thủy",
+          "Nguyễn Văn Quang",
+          "Nguyễn Thị Thu Hoài",
+          "Nguyễn Thị Mai Anh",
+          "DJ Thái Hoàng"
+        ]
+      },
+      {
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036",
+        "amount": "0,686g",
+        "people": [
+          "Cao Thị Bích Hằng",
+          "Nguyễn Thị Mai Anh",
+          "Trần Quốc An",
+          "Ngô Việt Dũng",
+          "Lê Văn Đông"
+        ]
+      }
+    ]
+  },
+  "hoang_nato": {
+    "cypher": "MATCH (p:Person)-[r:INVOLVED_IN]->(k:Case) WHERE p.name = 'Dương Minh Tuấn' OR 'Hoàng Nato' IN coalesce(p.aliases, []) OPTIONAL MATCH (k)-[:INVOLVES]->(s:Substance) OPTIONAL MATCH (k)-[:CHARGED_WITH]->(c:Crime)<-[:DEFINES]-(a:Article) RETURN p.name AS person, r.charge AS charge, k.name AS case_name, k.doc_id AS doc_id, collect(DISTINCT s.name) AS substances, collect(DISTINCT a.id) AS articles ORDER BY doc_id",
+    "rows": [
+      {
+        "person": "Dương Minh Tuấn",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "case_name": "Vụ bắt giang hồ 'Hoàng Nato' và 126 người liên quan 8 đường dây ma túy",
+        "doc_id": "news-100260920221957595",
+        "substances": [
+          "Ketamine",
+          "ma túy tổng hợp",
+          "thuốc lắc",
+          "etomidate"
+        ],
+        "articles": [
+          "Điều 249 BLHS",
+          "Điều 251 BLHS",
+          "Điều 255 BLHS"
+        ]
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "case_name": "Vụ tổ chức sử dụng trái phép chất ma túy tại TP.HCM",
+        "doc_id": "news-100260922111804786",
+        "substances": [
+          "etomidate"
+        ],
+        "articles": [
+          "Điều 255 BLHS"
+        ]
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "case_name": "Vụ sử dụng ma túy etomidate của Hoàng Nato và Phan Kim Nhi",
+        "doc_id": "news-100260924095400982",
+        "substances": [
+          "etomidate"
+        ],
+        "articles": [
+          "Điều 255 BLHS"
+        ]
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "case_name": "Vụ triệt phá 8 đường dây ma túy tại TP.HCM",
+        "doc_id": "news-100260925144412498",
+        "substances": [
+          "etomidate"
+        ],
+        "articles": [
+          "Điều 251 BLHS",
+          "Điều 255 BLHS"
+        ]
+      }
+    ]
+  },
+  "article_255": {
+    "cypher": "MATCH (:Article {id:'Điều 255 BLHS'})-[:HAS_CLAUSE]->(cl:Clause) RETURN cl.number AS number, cl.penalty AS penalty, cl.text AS text ORDER BY number",
+    "rows": [
+      {
+        "number": 1,
+        "penalty": "phạt tù từ 02 năm đến 07 năm",
+        "text": "1. Người nào tổ chức sử dụng trái phép chất ma túy dưới bất kỳ hình thức nào, thì bị phạt tù từ 02 năm đến 07 năm."
+      },
+      {
+        "number": 2,
+        "penalty": "phạt tù từ 07 năm đến 15 năm",
+        "text": "2. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 07 năm đến 15 năm:\n\na) Phạm tội 02 lần trở lên;\n\nb) Đối với 02 người trở lên;\n\nc) Đối với người từ đủ 13 tuổi đến dưới 18 tuổi;\n\nd) Đối với phụ nữ mà biết là có thai;\n\nđ) Đối với người đang cai nghiện;\n\ne) Gây tổn hại cho sức khỏe của người khác mà tỷ lệ tổn thương cơ thể từ 31% đến 60%;\n\ng) Gây bệnh nguy hiểm cho người khác;\n\nh) Tái phạm nguy hiểm."
+      },
+      {
+        "number": 3,
+        "penalty": "phạt tù từ 15 năm đến 20 năm",
+        "text": "3. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 15 năm đến 20 năm:\n\na) Gây tổn hại cho sức khỏe của người khác mà tỷ lệ tổn thương cơ thể từ 61% trở lên hoặc gây chết người;\n\nb) Gây tổn hại cho sức khỏe của 02 người trở lên mà tỷ lệ tổn thương cơ thể của mỗi người từ 31% đến 60%;\n\nc) Gây bệnh nguy hiểm cho 02 người trở lên;\n\nd) Đối với người dưới 13 tuổi."
+      },
+      {
+        "number": 4,
+        "penalty": "phạt tù 20 năm hoặc tù chung thân",
+        "text": "4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm hoặc tù chung thân:\n\na) Gây tổn hại cho sức khỏe của 02 người trở lên mà tỷ lệ tổn thương cơ thể của mỗi người 61% trở lên;\n\nb) Làm chết 02 người trở lên."
+      },
+      {
+        "number": 5,
+        "penalty": "phạt tiền từ 50.000.000 đồng đến 500.000.000 đồng, phạt quản chế, cấm cư trú từ 01 năm đến 05 năm hoặc tịch thu một phần hoặc toàn bộ tài sản",
+        "text": "5. Người phạm tội còn có thể bị phạt tiền từ 50.000.000 đồng đến 500.000.000 đồng, phạt quản chế, cấm cư trú từ 01 năm đến 05 năm hoặc tịch thu một phần hoặc toàn bộ tài sản."
+      }
+    ]
+  },
+  "huy_provenance": {
+    "cypher": "MATCH (p:Person {name:'Cái Quang Huy'})-[r:INVOLVED_IN]->(k:Case) RETURN p.name AS person, k.name AS case_name, k.doc_id AS doc_id, r.charge AS charge, r.sentence AS sentence ORDER BY doc_id",
+    "rows": [
+      {
+        "person": "Cái Quang Huy",
+        "case_name": "Vụ vận chuyển ma túy từ Đức về Việt Nam",
+        "doc_id": "news-100260917203001265",
+        "charge": "vận chuyển trái phép chất ma túy",
+        "sentence": ""
+      },
+      {
+        "person": "Cái Quang Huy",
+        "case_name": "Vụ vận chuyển ma túy của Cái Quang Huy",
+        "doc_id": "news-100260918080821054",
+        "charge": "vận chuyển trái phép chất ma túy",
+        "sentence": ""
+      }
+    ]
+  },
+  "my_case": {
+    "cypher": "MATCH (p:Person {name:'Trần Thanh Tuấn'})-[r:INVOLVED_IN]->(k:Case)-[:CHARGED_WITH]->(c:Crime)<-[:DEFINES]-(a:Article) RETURN p.name AS person, r.sentence AS sentence, k.name AS case_name, c.name AS crime, a.id AS article",
+    "rows": [
+      {
+        "person": "Trần Thanh Tuấn",
+        "sentence": "tử hình",
+        "case_name": "Vụ mua bán hơn 36kg ma túy tại TP.HCM",
+        "crime": "tổ chức sử dụng trái phép chất ma túy",
+        "article": "Điều 255 BLHS"
+      },
+      {
+        "person": "Trần Thanh Tuấn",
+        "sentence": "tử hình",
+        "case_name": "Vụ mua bán hơn 36kg ma túy tại TP.HCM",
+        "crime": "mua bán trái phép chất ma túy",
+        "article": "Điều 251 BLHS"
+      }
+    ]
+  },
+  "q4_context": [
+    "Vụ việc 'Vụ bắt giang hồ 'Hoàng Nato' và 126 người liên quan 8 đường dây ma túy' [nguồn news-100260920221957595]: Công an TP.HCM đã bắt giữ giang hồ 'Hoàng Nato' và 126 người liên quan đến 8 đường dây ma túy, trong đó có 9 người nước ngoài. Các nghi phạm bị cáo buộc tổ chức sử dụng trái phép chất ma túy.",
+    "Vụ việc 'Vụ tổ chức sử dụng trái phép chất ma túy tại TP.HCM' [nguồn news-100260922111804786]: TikToker Phannhibeauty cùng 126 người khác bị bắt trong chuyên án liên quan đến ma túy. Trong đó, Phan Kim Nhi bị điều tra về hành vi tổ chức sử dụng trái phép chất ma túy.",
+    "Vụ việc 'Vụ sử dụng ma túy etomidate của Hoàng Nato và Phan Kim Nhi' [nguồn news-100260924095400982]: Hoàng Nato và TikToker Phannhibeauty khai nhận đã cùng nhau sử dụng ma túy etomidate ngụy trang trong thuốc lá điện tử. Cả hai bị bắt giữ sau khi tổ chức sử dụng ma túy.",
+    "Vụ việc 'Vụ triệt phá 8 đường dây ma túy tại TP.HCM' [nguồn news-100260925144412498]: Công an TP.HCM đã triệt phá 8 đường dây ma túy và bắt giữ 126 người liên quan đến các hành vi mua bán, tàng trữ, tổ chức sử dụng và sử dụng trái phép chất ma túy, trong đó có 'Hoàng Nato' và bạn gái Phan Kim Nhi.",
+    "[Điều 249 BLHS - Tội tàng trữ trái phép chất ma túy] khoản 1: 1. Người nào tàng trữ trái phép chất ma túy mà không nhằm mục đích mua bán, vận chuyển, sản xuất trái phép chất ma túy thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 01 năm đến 05 năm:\n\na) Đã bị xử phạt vi phạm hành chính về hành vi quy định tại Điều này hoặc đã bị kết án về tội này hoặc một trong các tội quy định tại các điều 248, 250, 251 và 252 của Bộ luật này, chưa được xóa án tích mà còn vi phạm;\n\nb) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 gam đến dưới 500 gam;\n\nc) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 0,1 gam đến dưới 05 gam;\n\nd) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\nđ) Quả thuốc phiện khô có khối lượng từ 05 kilôgam đến dưới 50 kilôgam;\n\ne) Quả thuốc phiện tươi có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\ng) Các chất ma túy khác ở thể rắn có khối lượng từ 01 gam đến dưới 20 gam;\n\nh) Các chất ma túy khác ở thể lỏng có thể tích từ 10 mililít đến dưới 100 mililít;\n\ni) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm b đến điểm h khoản này.",
+    "[Điều 251 BLHS - Tội mua bán trái phép chất ma túy] khoản 1: 1. Người nào mua bán trái phép chất ma túy, thì bị phạt tù từ 02 năm đến 07 năm.",
+    "[Điều 255 BLHS - Tội tổ chức sử dụng trái phép chất ma túy] khoản 1: 1. Người nào tổ chức sử dụng trái phép chất ma túy dưới bất kỳ hình thức nào, thì bị phạt tù từ 02 năm đến 07 năm.",
+    "(Person: Dương Minh Tuấn) -[INVOLVED_IN {role: bị cáo, charge: tổ chức sử dụng trái phép chất ma túy}]-> (Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM)",
+    "(Person: Dương Minh Tuấn) -[INVOLVED_IN {role: bị cáo, charge: tổ chức sử dụng trái phép chất ma túy}]-> (Case: Vụ sử dụng ma túy etomidate của Hoàng Nato và Phan Kim Nhi)",
+    "(Person: Dương Minh Tuấn) -[INVOLVED_IN {role: bị cáo, charge: tổ chức sử dụng trái phép chất ma túy}]-> (Case: Vụ tổ chức sử dụng trái phép chất ma túy tại TP.HCM)",
+    "(Person: Dương Minh Tuấn) -[INVOLVED_IN {role: bị cáo, charge: tổ chức sử dụng trái phép chất ma túy}]-> (Case: Vụ bắt giang hồ 'Hoàng Nato' và 126 người liên quan 8 đường dây ma túy)",
+    "(Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM) -[CHARGED_WITH]-> (Crime: mua bán trái phép chất ma túy)",
+    "(Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM) -[LOCATED_IN]-> (Location: TP.HCM)",
+    "(Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM) -[CHARGED_WITH]-> (Crime: tổ chức sử dụng trái phép chất ma túy)",
+    "(Person: Phan Kim Nhi) -[INVOLVED_IN {role: bị cáo, charge: tổ chức sử dụng trái phép chất ma túy}]-> (Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM)",
+    "(Case: Vụ triệt phá 8 đường dây ma túy tại TP.HCM) -[INVOLVES {amount: không rõ}]-> (Substance: etomidate)"
+  ],
+  "q6_context_without_vector": [
+    "Vụ việc 'Vụ vận chuyển ma túy từ Đức về Việt Nam' [nguồn news-100260917203001265]: Cái Quang Huy bị cáo buộc hai lần vận chuyển ma túy về Việt Nam qua sân bay Nội Bài, với tổng khối lượng hơn 9,6kg MDMA và gần 406g Ketamine.",
+    "Vụ việc 'Vụ góp tiền mua ma túy tại Hà Nội' [nguồn news-100260918080821054]: Ba thanh niên góp tiền để Lê Minh Thành mua ma túy cho tiệc sinh nhật nhưng sau đó không tham gia. Tòa sơ thẩm tuyên phạt mỗi người 24 tháng tù về tội mua bán trái phép chất ma túy.",
+    "Vụ việc 'Vụ vận chuyển ma túy của Cái Quang Huy' [nguồn news-100260918080821054]: Cái Quang Huy bị cáo buộc hai lần vận chuyển ma túy về Việt Nam qua sân bay Nội Bài, tổng số ma túy gồm hơn 9,6kg MDMA và gần 406g Ketamine.",
+    "Vụ việc 'Vụ án tại Viện Pháp y tâm thần Trung ương' [nguồn news-100260924105118645]: Vụ án liên quan đến việc 39 bác sĩ, điều dưỡng và nhiều bị cáo thao túng để 'chạy' giám định tâm thần, trong đó có nhiều người phạm tội ma túy.",
+    "Vụ việc 'Vụ mua bán hơn 36kg ma túy tại TP.HCM' [nguồn news-100260928173914514]: Hai bị cáo Trần Thanh Tuấn và Trần Minh Tâm bị tuyên án tử hình về tội mua bán trái phép chất ma túy. Bốn bị cáo khác nhận án tù từ 2 năm 6 tháng đến 8 năm 6 tháng.",
+    "Vụ việc 'Vụ tổ chức sử dụng ma túy tại Sầm Sơn' [nguồn news-100260930085028036]: Lê Văn Đông, trong thời gian chữa bệnh bắt buộc, đã tổ chức sử dụng ma túy trên bãi biển Sầm Sơn cùng với một số người khác. Đông bị cáo buộc đã trốn viện để thực hiện hành vi này.",
+    "[Điều 249 BLHS - Tội tàng trữ trái phép chất ma túy] khoản 1: 1. Người nào tàng trữ trái phép chất ma túy mà không nhằm mục đích mua bán, vận chuyển, sản xuất trái phép chất ma túy thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 01 năm đến 05 năm:\n\na) Đã bị xử phạt vi phạm hành chính về hành vi quy định tại Điều này hoặc đã bị kết án về tội này hoặc một trong các tội quy định tại các điều 248, 250, 251 và 252 của Bộ luật này, chưa được xóa án tích mà còn vi phạm;\n\nb) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 gam đến dưới 500 gam;\n\nc) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 0,1 gam đến dưới 05 gam;\n\nd) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\nđ) Quả thuốc phiện khô có khối lượng từ 05 kilôgam đến dưới 50 kilôgam;\n\ne) Quả thuốc phiện tươi có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\ng) Các chất ma túy khác ở thể rắn có khối lượng từ 01 gam đến dưới 20 gam;\n\nh) Các chất ma túy khác ở thể lỏng có thể tích từ 10 mililít đến dưới 100 mililít;\n\ni) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm b đến điểm h khoản này.",
+    "[Điều 249 BLHS - Tội tàng trữ trái phép chất ma túy] khoản 2: 2. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 05 năm đến 10 năm:\n\na) Có tổ chức;\n\nb) Phạm tội 02 lần trở lên;\n\nc) Lợi dụng chức vụ, quyền hạn;\n\nd) Lợi dụng danh nghĩa cơ quan, tổ chức;\n\nđ) Sử dụng người dưới 16 tuổi vào việc phạm tội;\n\ne) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 500 gam đến dưới 01 kilôgam;\n\ng) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 05 gam đến dưới 30 gam;\n\nh) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 10 kilôgam đến dưới 25 kilôgam;\n\ni) Quả thuốc phiện khô có khối lượng từ 50 kilôgam đến dưới 200 kilôgam;\n\nk) Quả thuốc phiện tươi có khối lượng từ 10 kilôgam đến dưới 50 kilôgam;\n\nl) Các chất ma túy khác ở thể rắn có khối lượng từ 20 gam đến dưới 100 gam;\n\nm) Các chất ma túy khác ở thể lỏng có thể tích từ 100 mililít đến dưới 250 mililít;\n\nn) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm e đến điểm m khoản này;\n\no) Tái phạm nguy hiểm.",
+    "[Điều 249 BLHS - Tội tàng trữ trái phép chất ma túy] khoản 3: 3. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 10 năm đến 15 năm:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 kilôgam đến dưới 05 kilôgam;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 30 gam đến dưới 100 gam;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 25 kilôgam đến dưới 75 kilôgam;\n\nd) Quả thuốc phiện khô có khối lượng từ 200 kilôgam đến dưới 600 kilôgam;\n\nđ) Quả thuốc phiện tươi có khối lượng tù 50 kilôgam đến dưới 150 kilôgam;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng từ 100 gam đến dưới 300 gam;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích từ 250 mililít đến dưới 750 mililít;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 249 BLHS - Tội tàng trữ trái phép chất ma túy] khoản 4: 4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 15 năm đến 20 năm hoặc tù chung thân:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng 05 kilôgam trở lên;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng 75 kilôgam trở lên;\n\nd) Quả thuốc phiện khô có khối lượng 600 kilôgam trở lên;\n\nđ) Quả thuốc phiện tươi có khối lượng 150 kilôgam trở lên;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng 300 gam trở lên;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích 750 mililít trở lên;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 1: 1. Người nào vận chuyển trái phép chất ma túy mà không nhằm mục đích sản xuất, mua bán, tàng trữ trái phép chất ma túy thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 02 năm đến 07 năm:\n\na) Đã bị xử phạt vi phạm hành chính về hành vi quy định tại Điều này hoặc đã bị kết án về tội này hoặc một trong các tội quy định tại các điều 248, 249, 251 và 252 của Bộ luật này, chưa được xóa án tích mà còn vi phạm;\n\nb) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 gam đến dưới 500 gam;\n\nc) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 0,1 gam đến dưới 05 gam;\n\nd) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\nđ) Quả thuốc phiện khô có khối lượng từ 05 kilôgam đến dưới 50 kilôgam;\n\ne) Quả thuốc phiện tươi có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\ng) Các chất ma túy khác ở thể rắn có khối lượng từ 01 gam đến dưới 20 gam;\n\nh) Các chất ma túy khác ở thể lỏng có thể tích từ 10 mililít đến dưới 100 mililít;\n\ni) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm b đến điểm h khoản này.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 2: 2. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 07 năm đến 15 năm:\n\na) Có tổ chức;\n\nb) Phạm tội 02 lần trở lên;\n\nc) Lợi dụng chức vụ, quyền hạn;\n\nd) Lợi dụng danh nghĩa cơ quan, tổ chức;\n\nđ) Sử dụng người dưới 16 tuổi vào việc phạm tội;\n\ne) Qua biên giới;\n\ng) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 500 gam đến dưới 01 kilôgam;\n\nh) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 05 gam đến dưới 30 gam;\n\ni) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 10 kilôgam đến dưới 25 kilôgam;\n\nk) Quả thuốc phiện khô có khối lượng từ 50 kilôgam đến dưới 200 kilôgam;\n\nl) Quả thuốc phiện tươi có khối lượng từ 10 kilôgam đến dưới 50 kilôgam;\n\nm) Các chất ma túy khác ở thể rắn có khối lượng từ 20 gam đến dưới 100 gam;\n\nn) Các chất ma túy khác ở thể lỏng có thể tích từ 100 mililít đến dưới 250 mililít;\n\no) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm g đến điểm n khoản này;\n\np) Tái phạm nguy hiểm.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 3: 3. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 15 năm đến 20 năm:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 kilôgam đến dưới 05 kilôgam;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 30 gam đến dưới 100 gam;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 25 kilôgam đến dưới 75 kilôgam;\n\nd) Quả thuốc phiện khô có khối lượng từ 200 kilôgam đến dưới 600 kilôgam;\n\nđ) Quả thuốc phiện tươi có khối lượng từ 50 kilôgam đến dưới 150 kilôgam;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng từ 100 gam đến dưới 300 gam;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích từ 250 mililít đến dưới 750 mililít;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 4: 4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm, tù chung thân hoặc tử hình:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng 05 kilôgam trở lên;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng 75 kilôgam trở lên;\n\nd) Quả thuốc phiện khô có khối lượng 600 kilôgam trở lên;\n\nđ) Quả thuốc phiện tươi có khối lượng 150 kilôgam trở lên;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng 300 gam trở lên;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích 750 mililít trở lên;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 251 BLHS - Tội mua bán trái phép chất ma túy] khoản 1: 1. Người nào mua bán trái phép chất ma túy, thì bị phạt tù từ 02 năm đến 07 năm.",
+    "[Điều 251 BLHS - Tội mua bán trái phép chất ma túy] khoản 2: 2. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 07 năm đến 15 năm:\n\na) Có tổ chức;\n\nb) Phạm tội 02 lần trở lên;\n\nc) Đối với 02 người trở lên;\n\nd) Lợi dụng chức vụ, quyền hạn;\n\nđ) Lợi dụng danh nghĩa cơ quan, tổ chức;\n\ne) Sử dụng người dưới 16 tuổi vào việc phạm tội hoặc bán ma túy cho người dưới 16 tuổi;\n\ng) Qua biên giới;\n\nh) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 500 gam đến dưới 01 kilôgam;\n\ni) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 05 gam đến dưới 30 gam;\n\nk) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 10 kilôgam đến dưới 25 kilôgam;\n\nl) Quả thuốc phiện khô có khối lượng từ 50 kilôgam đến dưới 200 kilôgam;\n\nm) Quả thuốc phiện tươi có khối lượng từ 10 kilôgam đến dưới 50 kilôgam;\n\nn) Các chất ma túy khác ở thể rắn có khối lượng từ 20 gam đến dưới 100 gam;\n\no) Các chất ma túy khác ở thể lỏng có thể tích từ 100 mililít đến dưới 250 mililít;\n\np) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm h đến điểm o khoản này;\n\nq) Tái phạm nguy hiểm.",
+    "[Điều 251 BLHS - Tội mua bán trái phép chất ma túy] khoản 3: 3. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 15 năm đến 20 năm:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 kilôgam đến dưới 05 kilôgam;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 30 gam đến dưới 100 gam;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 25 kilôgam đến dưới 75 kilôgam;\n\nd) Quả thuốc phiện khô có khối lượng từ 200 kilôgam đến dưới 600 kilôgam;\n\nđ) Quả thuốc phiện tươi có khối lượng từ 50 kilôgam đến dưới 150 kilôgam;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng từ 100 gam đến dưới 300 gam;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích từ 250 mililít đến dưới 750 mililít;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 251 BLHS - Tội mua bán trái phép chất ma túy] khoản 4: 4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm, tù chung thân hoặc tử hình:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng 05 kilôgam trở lên;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng 75 kilôgam trở lên;\n\nd) Quả thuốc phiện khô có khối lượng 600 kilôgam trở lên;\n\nđ) Quả thuốc phiện tươi có khối lượng 150 kilôgam trở lên;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng 300 gam trở lên;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích 750 mililít trở lên;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này.",
+    "[Điều 255 BLHS - Tội tổ chức sử dụng trái phép chất ma túy] khoản 1: 1. Người nào tổ chức sử dụng trái phép chất ma túy dưới bất kỳ hình thức nào, thì bị phạt tù từ 02 năm đến 07 năm.",
+    "(Case: Vụ tổ chức sử dụng ma túy tại Sầm Sơn) -[INVOLVES {amount: 0,686g}]-> (Substance: MDMA)",
+    "(Case: Vụ án tại Viện Pháp y tâm thần Trung ương) -[INVOLVES]-> (Substance: MDMA)",
+    "(Case: Vụ vận chuyển ma túy của Cái Quang Huy) -[INVOLVES {amount: 9,6kg}]-> (Substance: MDMA)",
+    "(Case: Vụ góp tiền mua ma túy tại Hà Nội) -[INVOLVES {amount: 5 viên}]-> (Substance: MDMA)",
+    "(Case: Vụ vận chuyển ma túy từ Đức về Việt Nam) -[INVOLVES {amount: 9.6kg}]-> (Substance: MDMA)",
+    "(Case: Vụ mua bán hơn 36kg ma túy tại TP.HCM) -[INVOLVES {amount: 36kg}]-> (Substance: ma túy)"
+  ],
+  "stats": {
+    "nodes": 200,
+    "relationships": 380
+  }
+}

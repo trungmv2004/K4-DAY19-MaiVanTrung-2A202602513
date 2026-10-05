@@ -116,3 +116,41 @@ Phần base (chunking, vector store, agent RAG) **đã có sẵn và chạy đư
 - **Tin tức:** lấy từ tuoitre.vn; robots.txt cho phép; chỉ dùng cho mục đích học tập.
 - URL và ngày lấy của từng file nằm trong `sources.csv`.
 - Nội dung là văn bản pháp luật và tin tức công khai, dùng cho mục đích kỹ thuật. Câu trả lời của hệ thống **không phải tư vấn pháp lý**.
+
+## Bản triển khai trong repo này
+
+Đã hoàn thành KG-1–KG-4 và **ontology bonus** với 12 label, 15 loại cạnh. Thiết kế thêm nguồn/báo cáo, Participation theo người và nguồn, DrugFinding + Threshold đối chiếu lượng, Penalty + MAX_PENALTY tìm khung cao nhất. Cấu hình `.env.example` chọn **OpenRouter cho cả chat và embedding**: `openai/gpt-4o-mini` và `openai/text-embedding-3-small`. Điền `OPENROUTER_API_KEY` trong `.env`; không đưa key vào code hoặc báo cáo.
+
+Chạy trong PowerShell, tại thư mục repo sau khi cài `requirements.txt` và khởi động Neo4j:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+.venv/Scripts/python.exe -m pytest tests/ -q
+.venv/Scripts/python.exe -u bench_kg.py --check
+.venv/Scripts/python.exe -u bench_kg.py --judge
+.venv/Scripts/python.exe scripts/audit_kg.py
+.venv/Scripts/python.exe scripts/compare_bonus.py
+```
+
+Chạy `--check` **trước** benchmark vì check thay graph bằng luật + một bài báo. Sau `--judge`, graph đầy đủ còn tại http://localhost:7474. Kết quả ngày 05/10/2026: **58 test pass** (48 gốc + 10 bonus), 7 dòng check OK, **360 node / 691 cạnh**; recall Flat 0,43 và Graph 1,00, judge tương ứng 1,00 và 1,83. Q6 vẫn còn lỗi phân biệt người và vụ; chi tiết nằm trong [báo cáo](report/REPORT_KG.md), [ontology](report/ONTOLOGY.md) và [benchmark](ket_qua_benchmark_kg.txt).
+
+Baseline ontology gợi ý được giữ nguyên trong [ket_qua_benchmark_kg.hint.txt](ket_qua_benchmark_kg.hint.txt), `src/hint_graph.py` và `report/hint/`. Graph bonus so với baseline: recall **0,89 → 1,00**, judge **1,67 → 1,83**, chi phí mỗi câu **0,00071 → 0,00053 USD**; indexing tăng từ 0,00929 lên 0,01145 USD. Báo cáo mục 6 so sánh trước/sau và mục 7 ONTOLOGY giải thích các khác biệt. `scripts/compare_bonus.py` kiểm tra hash baseline, số liệu và sinh báo cáo từ các file thực tế; cần giữ log test/check khớp lần đo.
+
+Để chạy lại ontology gợi ý mà vẫn giữ file baseline gốc:
+
+```powershell
+$env:LAB_SOLUTION_PACKAGE='src_hint'
+.venv/Scripts/python.exe bench_kg.py --judge --out ket_qua_benchmark_kg.hint.rerun.txt
+Remove-Item Env:LAB_SOLUTION_PACKAGE
+```
+
+Lệnh này thay graph hiện tại; chạy lại pipeline bonus, audit, chụp ảnh và sinh báo cáo để khôi phục bộ bằng chứng cuối.
+
+Chụp lại ba ảnh thật trên Windows có Chrome:
+
+```powershell
+.venv/Scripts/python.exe -m pip install -r requirements-browser.txt
+.venv/Scripts/python.exe scripts/capture_neo4j.py
+```
+
+Script chụp nguyên cửa sổ Neo4j Browser sau mỗi truy vấn và lưu `report/img/`; bằng chứng truy vấn read-only được lưu bởi `scripts/audit_kg.py`. Nếu đo lại, cập nhật báo cáo và ảnh để khớp graph mới. Bài làm được commit cục bộ theo yêu cầu; **chưa push**.

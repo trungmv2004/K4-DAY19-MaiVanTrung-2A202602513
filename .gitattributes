@@ -1,0 +1,6 @@
+# Preserve exact bytes of the artifacts hashed by report/bonus_comparison.json.
+/ket_qua_benchmark_kg.hint.txt -text
+/ket_qua_benchmark_kg.txt -text
+/src/hint_graph.py -text
+/src/graph.py -text
+/src/legal_evidence.py -text

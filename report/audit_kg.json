@@ -1,0 +1,633 @@
+{
+  "node_counts": {
+    "cypher": "MATCH (n) RETURN labels(n)[0] AS label, count(*) AS n ORDER BY n DESC",
+    "rows": [
+      {
+        "label": "Clause",
+        "n": 99
+      },
+      {
+        "label": "Penalty",
+        "n": 44
+      },
+      {
+        "label": "SourceDocument",
+        "n": 38
+      },
+      {
+        "label": "Participation",
+        "n": 35
+      },
+      {
+        "label": "DrugFinding",
+        "n": 27
+      },
+      {
+        "label": "Person",
+        "n": 26
+      },
+      {
+        "label": "CaseReport",
+        "n": 20
+      },
+      {
+        "label": "Article",
+        "n": 18
+      },
+      {
+        "label": "Threshold",
+        "n": 18
+      },
+      {
+        "label": "Substance",
+        "n": 14
+      },
+      {
+        "label": "Crime",
+        "n": 13
+      },
+      {
+        "label": "Location",
+        "n": 8
+      }
+    ]
+  },
+  "relationship_counts": {
+    "cypher": "MATCH ()-[r]->() RETURN type(r) AS rel, count(*) AS n ORDER BY n DESC",
+    "rows": [
+      {
+        "rel": "MENTIONS",
+        "n": 169
+      },
+      {
+        "rel": "FOR_SUBSTANCE",
+        "n": 108
+      },
+      {
+        "rel": "HAS_CLAUSE",
+        "n": 99
+      },
+      {
+        "rel": "HAS_PENALTY",
+        "n": 44
+      },
+      {
+        "rel": "DESCRIBES",
+        "n": 38
+      },
+      {
+        "rel": "HAS_PARTICIPATION",
+        "n": 35
+      },
+      {
+        "rel": "IN_REPORT",
+        "n": 35
+      },
+      {
+        "rel": "ACCUSED_OF",
+        "n": 27
+      },
+      {
+        "rel": "HAS_FINDING",
+        "n": 27
+      },
+      {
+        "rel": "OF_SUBSTANCE",
+        "n": 27
+      },
+      {
+        "rel": "LOCATED_IN",
+        "n": 20
+      },
+      {
+        "rel": "HAS_THRESHOLD",
+        "n": 18
+      },
+      {
+        "rel": "ALLEGES",
+        "n": 18
+      },
+      {
+        "rel": "MAX_PENALTY",
+        "n": 13
+      },
+      {
+        "rel": "DEFINES",
+        "n": 13
+      }
+    ]
+  },
+  "bridge_count": {
+    "cypher": "MATCH (:CaseReport)-[:ALLEGES]->(:Crime)<-[:DEFINES]-(:Article) RETURN count(*) AS paths",
+    "rows": [
+      {
+        "paths": 18
+      }
+    ]
+  },
+  "broken_bridges": {
+    "cypher": "MATCH (k:CaseReport) WHERE NOT (k)-[:ALLEGES]->() RETURN k.name AS name, k.doc_id AS doc_id ORDER BY doc_id",
+    "rows": [
+      {
+        "name": "",
+        "doc_id": "news-100260916224844654"
+      },
+      {
+        "name": "Nguyễn Minh Đức",
+        "doc_id": "news-100260918220613301"
+      },
+      {
+        "name": "Bắt giữ nhóm người Trung Quốc vận chuyển ma túy",
+        "doc_id": "news-100260924145818945"
+      },
+      {
+        "name": "Bệnh viện không ma túy",
+        "doc_id": "news-100260924184319083"
+      },
+      {
+        "name": "Phát hiện ma túy trôi dạt",
+        "doc_id": "news-100260927182621527"
+      },
+      {
+        "name": "",
+        "doc_id": "news-100260928003224009"
+      },
+      {
+        "name": "TP.HCM không ma túy",
+        "doc_id": "news-100260928111813276"
+      },
+      {
+        "name": "",
+        "doc_id": "news-100260929130300513"
+      }
+    ]
+  },
+  "substances": {
+    "cypher": "MATCH (s:Substance) RETURN s.name AS name ORDER BY toLower(s.name)",
+    "rows": [
+      {
+        "name": "Amphetamine"
+      },
+      {
+        "name": "Cocaine"
+      },
+      {
+        "name": "côca"
+      },
+      {
+        "name": "cần sa"
+      },
+      {
+        "name": "etomidate"
+      },
+      {
+        "name": "Heroine"
+      },
+      {
+        "name": "Ketamine"
+      },
+      {
+        "name": "ma túy"
+      },
+      {
+        "name": "ma túy tổng hợp"
+      },
+      {
+        "name": "MDMA"
+      },
+      {
+        "name": "Methamphetamine"
+      },
+      {
+        "name": "thuốc lắc"
+      },
+      {
+        "name": "thuốc phiện"
+      },
+      {
+        "name": "XLR-11"
+      }
+    ]
+  },
+  "blank_charges": {
+    "cypher": "MATCH (p:Person)-[:HAS_PARTICIPATION]->(i:Participation)-[:IN_REPORT]->(k:CaseReport) WHERE NOT (i)-[:ACCUSED_OF]->() RETURN p.name AS person, i.role AS role, k.name AS case_name, k.doc_id AS doc_id ORDER BY doc_id, person",
+    "rows": [
+      {
+        "person": "Nguyễn Minh Đức",
+        "role": "giang hồ mạng",
+        "case_name": "Nguyễn Minh Đức",
+        "doc_id": "news-100260918220613301"
+      },
+      {
+        "person": "Trần Văn Trường",
+        "role": "cựu viện trưởng",
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645"
+      },
+      {
+        "person": "7 công dân Trung Quốc",
+        "role": "nghi phạm",
+        "case_name": "Bắt giữ nhóm người Trung Quốc vận chuyển ma túy",
+        "doc_id": "news-100260924145818945"
+      },
+      {
+        "person": "Lê Quốc Hùng",
+        "role": "Thứ trưởng Bộ Công an",
+        "case_name": "TP.HCM không ma túy",
+        "doc_id": "news-100260928111813276"
+      },
+      {
+        "person": "Vũ Đình Thinh",
+        "role": "Thiếu tá, đại diện PC04",
+        "case_name": "",
+        "doc_id": "news-100260929130300513"
+      },
+      {
+        "person": "Cao Thị Bích Hằng",
+        "role": "vợ của An",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Nguyễn Thị Mai Anh",
+        "role": "vợ của Đông",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Ngô Việt Dũng",
+        "role": "đàn em của Đông",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      },
+      {
+        "person": "Trần Quốc An",
+        "role": "điều dưỡng",
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036"
+      }
+    ]
+  },
+  "mdma_cases": {
+    "cypher": "MATCH (k:CaseReport)-[:HAS_FINDING]->(f:DrugFinding)-[:OF_SUBSTANCE]->(:Substance {name:'MDMA'}) RETURN k.name AS case_name, k.doc_id AS doc_id, f.amount AS amount, f.mass_g AS mass_g, f.qualifier AS qualifier, f.subject AS subject, f.evidence AS evidence, f.verified AS verified ORDER BY doc_id, subject, amount",
+    "rows": [
+      {
+        "case_name": "Cái Quang Huy và Nguyễn Tiến Đạt",
+        "doc_id": "news-100260917203001265",
+        "amount": "gần 4,3kg",
+        "mass_g": 4300.0,
+        "qualifier": "approx",
+        "subject": "",
+        "evidence": "Kết quả giám định xác định toàn bộ số viên nén này là MDMA, tổng khối lượng gần 4,3kg.",
+        "verified": true
+      },
+      {
+        "case_name": "Cái Quang Huy và Nguyễn Tiến Đạt",
+        "doc_id": "news-100260917203001265",
+        "amount": "hơn 9,6kg",
+        "mass_g": 9600.0,
+        "qualifier": "gt",
+        "subject": "Cái Quang Huy",
+        "evidence": "Tổng khối lượng ma túy Huy phải chịu trách nhiệm hình sự là hơn 9,6kg ma túy MDMA và khoảng 406g Ketamine. Nguyễn Tiến Đạt phải chịu trách nhiệm hình sự đối với gần 4,3kg MDMA.",
+        "verified": true
+      },
+      {
+        "case_name": "Cái Quang Huy và Nguyễn Tiến Đạt",
+        "doc_id": "news-100260917203001265",
+        "amount": "hơn 5,3kg",
+        "mass_g": 5300.0,
+        "qualifier": "gt",
+        "subject": "Nguyễn Hữu Đức",
+        "evidence": "Kết quả giám định xác định số viên nén hình tam giác màu hồng - xám là MDMA, tổng khối lượng hơn 5,3kg.",
+        "verified": true
+      },
+      {
+        "case_name": "Mua bán trái phép chất ma túy",
+        "doc_id": "news-100260918080821054",
+        "amount": "5 viên",
+        "mass_g": null,
+        "qualifier": "unknown",
+        "subject": "Lê Minh Thành",
+        "evidence": "Cơ quan công an thu giữ một hộp vuông màu xanh chứa 5 viên nén màu trắng. Kết luận giám định xác định số viên nén này là ma túy MDMA.",
+        "verified": true
+      },
+      {
+        "case_name": "Vụ án tại Viện Pháp y tâm thần Trung ương",
+        "doc_id": "news-100260924105118645",
+        "amount": "",
+        "mass_g": null,
+        "qualifier": "unknown",
+        "subject": "Nguyễn Thị Mai Anh",
+        "evidence": "Khi khám xét phòng của vợ chồng Mai Anh trong viện, công an tiếp tục thu giữ MDMA.",
+        "verified": false
+      },
+      {
+        "case_name": "Vụ tổ chức sử dụng ma túy tại Sầm Sơn",
+        "doc_id": "news-100260930085028036",
+        "amount": "0,686g",
+        "mass_g": null,
+        "qualifier": "eq",
+        "subject": "Lê Văn Đông",
+        "evidence": "cơ quan điều tra thu 0,686g ma túy MDMA",
+        "verified": false
+      }
+    ]
+  },
+  "hoang_nato": {
+    "cypher": "MATCH (p:Person)-[:HAS_PARTICIPATION]->(i:Participation)-[:IN_REPORT]->(k:CaseReport) WHERE p.name='Dương Minh Tuấn' OR 'Hoàng Nato' IN coalesce(p.aliases, []) OPTIONAL MATCH (i)-[:ACCUSED_OF]->(c:Crime)<-[:DEFINES]-(a:Article) OPTIONAL MATCH (a)-[:MAX_PENALTY]->(pen:Penalty) RETURN p.name AS person, i.role AS role, i.stage AS stage, k.doc_id AS doc_id, c.name AS charge, a.id AS article, pen.text AS maximum ORDER BY doc_id",
+    "rows": [
+      {
+        "person": "Dương Minh Tuấn",
+        "role": "nghi phạm",
+        "stage": "bị bắt",
+        "doc_id": "news-100260920221957595",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "article": "Điều 255 BLHS",
+        "maximum": "phạt tù 20 năm hoặc tù chung thân"
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "role": "nghi phạm",
+        "stage": "bị bắt",
+        "doc_id": "news-100260922111804786",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "article": "Điều 255 BLHS",
+        "maximum": "phạt tù 20 năm hoặc tù chung thân"
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "role": "nghi phạm",
+        "stage": "bị bắt",
+        "doc_id": "news-100260924095400982",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "article": "Điều 255 BLHS",
+        "maximum": "phạt tù 20 năm hoặc tù chung thân"
+      },
+      {
+        "person": "Dương Minh Tuấn",
+        "role": "nghi phạm",
+        "stage": "bắt giữ",
+        "doc_id": "news-100260925144412498",
+        "charge": "tổ chức sử dụng trái phép chất ma túy",
+        "article": "Điều 255 BLHS",
+        "maximum": "phạt tù 20 năm hoặc tù chung thân"
+      }
+    ]
+  },
+  "article_255": {
+    "cypher": "MATCH (:Article {id:'Điều 255 BLHS'})-[:HAS_CLAUSE]->(cl:Clause) RETURN cl.number AS number, cl.penalty AS penalty, cl.text AS text ORDER BY number",
+    "rows": [
+      {
+        "number": 1,
+        "penalty": "phạt tù từ 02 năm đến 07 năm",
+        "text": "1. Người nào tổ chức sử dụng trái phép chất ma túy dưới bất kỳ hình thức nào, thì bị phạt tù từ 02 năm đến 07 năm."
+      },
+      {
+        "number": 2,
+        "penalty": "phạt tù từ 07 năm đến 15 năm",
+        "text": "2. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 07 năm đến 15 năm:\n\na) Phạm tội 02 lần trở lên;\n\nb) Đối với 02 người trở lên;\n\nc) Đối với người từ đủ 13 tuổi đến dưới 18 tuổi;\n\nd) Đối với phụ nữ mà biết là có thai;\n\nđ) Đối với người đang cai nghiện;\n\ne) Gây tổn hại cho sức khỏe của người khác mà tỷ lệ tổn thương cơ thể từ 31% đến 60%;\n\ng) Gây bệnh nguy hiểm cho người khác;\n\nh) Tái phạm nguy hiểm."
+      },
+      {
+        "number": 3,
+        "penalty": "phạt tù từ 15 năm đến 20 năm",
+        "text": "3. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 15 năm đến 20 năm:\n\na) Gây tổn hại cho sức khỏe của người khác mà tỷ lệ tổn thương cơ thể từ 61% trở lên hoặc gây chết người;\n\nb) Gây tổn hại cho sức khỏe của 02 người trở lên mà tỷ lệ tổn thương cơ thể của mỗi người từ 31% đến 60%;\n\nc) Gây bệnh nguy hiểm cho 02 người trở lên;\n\nd) Đối với người dưới 13 tuổi."
+      },
+      {
+        "number": 4,
+        "penalty": "phạt tù 20 năm hoặc tù chung thân",
+        "text": "4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm hoặc tù chung thân:\n\na) Gây tổn hại cho sức khỏe của 02 người trở lên mà tỷ lệ tổn thương cơ thể của mỗi người 61% trở lên;\n\nb) Làm chết 02 người trở lên."
+      },
+      {
+        "number": 5,
+        "penalty": "phạt tiền từ 50.000.000 đồng đến 500.000.000 đồng, phạt quản chế, cấm cư trú từ 01 năm đến 05 năm hoặc tịch thu một phần hoặc toàn bộ tài sản",
+        "text": "5. Người phạm tội còn có thể bị phạt tiền từ 50.000.000 đồng đến 500.000.000 đồng, phạt quản chế, cấm cư trú từ 01 năm đến 05 năm hoặc tịch thu một phần hoặc toàn bộ tài sản."
+      }
+    ]
+  },
+  "huy_provenance": {
+    "cypher": "MATCH (p:Person {name:'Cái Quang Huy'})-[:HAS_PARTICIPATION]->(i:Participation)-[:IN_REPORT]->(k:CaseReport) OPTIONAL MATCH (i)-[:ACCUSED_OF]->(c:Crime) RETURN p.name AS person, k.name AS case_name, k.doc_id AS doc_id, collect(c.name) AS charges, i.stage AS stage, i.sentence AS sentence ORDER BY doc_id",
+    "rows": [
+      {
+        "person": "Cái Quang Huy",
+        "case_name": "Cái Quang Huy và Nguyễn Tiến Đạt",
+        "doc_id": "news-100260917203001265",
+        "charges": [
+          "vận chuyển trái phép chất ma túy"
+        ],
+        "stage": "truy nã",
+        "sentence": ""
+      }
+    ]
+  },
+  "my_case": {
+    "cypher": "MATCH (p:Person {name:'Trần Thanh Tuấn'})-[:HAS_PARTICIPATION]->(i:Participation)-[:ACCUSED_OF]->(c:Crime)<-[:DEFINES]-(a:Article) MATCH (i)-[:IN_REPORT]->(k:CaseReport) RETURN p.name AS person, i.sentence AS sentence, k.name AS case_name, c.name AS crime, a.id AS article",
+    "rows": [
+      {
+        "person": "Trần Thanh Tuấn",
+        "sentence": "tử hình",
+        "case_name": "Mua bán ma túy",
+        "crime": "mua bán trái phép chất ma túy",
+        "article": "Điều 251 BLHS"
+      }
+    ]
+  },
+  "maximum_255": {
+    "cypher": "MATCH (a:Article {id:'Điều 255 BLHS'})-[:MAX_PENALTY]->(p:Penalty)<-[:HAS_PENALTY]-(cl:Clause) RETURN a.id AS article, cl.number AS number, p.text AS penalty, p.life AS life, p.death AS death",
+    "rows": [
+      {
+        "article": "Điều 255 BLHS",
+        "number": 4,
+        "penalty": "phạt tù 20 năm hoặc tù chung thân",
+        "life": true,
+        "death": false
+      }
+    ]
+  },
+  "mdma_thresholds_250": {
+    "cypher": "MATCH (:Article {id:'Điều 250 BLHS'})-[:HAS_CLAUSE]->(cl:Clause)-[:HAS_THRESHOLD]->(t:Threshold)-[:FOR_SUBSTANCE]->(:Substance {name:'MDMA'}) RETURN cl.number AS number, t.point AS point, t.min_g AS min_g, t.max_g AS max_g, t.text AS text ORDER BY number",
+    "rows": [
+      {
+        "number": 1,
+        "point": "c",
+        "min_g": 0.1,
+        "max_g": 5.0,
+        "text": "c) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 0,1 gam đến dưới 05 gam;"
+      },
+      {
+        "number": 2,
+        "point": "h",
+        "min_g": 5.0,
+        "max_g": 30.0,
+        "text": "h) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 05 gam đến dưới 30 gam;"
+      },
+      {
+        "number": 3,
+        "point": "b",
+        "min_g": 30.0,
+        "max_g": 100.0,
+        "text": "b) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 30 gam đến dưới 100 gam;"
+      },
+      {
+        "number": 4,
+        "point": "b",
+        "min_g": 100.0,
+        "max_g": null,
+        "text": "b) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;"
+      }
+    ]
+  },
+  "huy_numeric_rule": {
+    "cypher": "MATCH (k:CaseReport)-[:HAS_FINDING]->(f:DrugFinding)-[:OF_SUBSTANCE]->(s:Substance {name:'MDMA'})<-[:FOR_SUBSTANCE]-(t:Threshold)<-[:HAS_THRESHOLD]-(cl:Clause)<-[:HAS_CLAUSE]-(a:Article {id:'Điều 250 BLHS'}) WHERE f.subject='Cái Quang Huy' AND f.quantity_verified=true AND f.qualifier IN ['eq','gt'] AND f.mass_g>=t.min_g AND (t.max_g IS NULL OR (f.qualifier='eq' AND f.mass_g<t.max_g)) RETURN k.doc_id AS doc_id, f.amount AS raw_amount, f.mass_g AS mass_g, f.qualifier AS qualifier, cl.number AS number, t.point AS point, t.min_g AS min_g, t.max_g AS max_g",
+    "rows": [
+      {
+        "doc_id": "news-100260917203001265",
+        "raw_amount": "hơn 9,6kg",
+        "mass_g": 9600.0,
+        "qualifier": "gt",
+        "number": 4,
+        "point": "b",
+        "min_g": 100.0,
+        "max_g": null
+      }
+    ]
+  },
+  "teaser_sources": {
+    "cypher": "MATCH (d:SourceDocument) WHERE d.excluded_teasers>0 RETURN d.id AS doc_id, d.excluded_teasers AS excluded ORDER BY doc_id",
+    "rows": [
+      {
+        "doc_id": "news-100260918080821054",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260922111804786",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260924095400982",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260925144412498",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260927182621527",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260928173914514",
+        "excluded": 1
+      },
+      {
+        "doc_id": "news-100260929130300513",
+        "excluded": 1
+      }
+    ]
+  },
+  "unverified_quantities": {
+    "cypher": "MATCH (f:DrugFinding) WHERE f.amount <> '' AND NOT f.quantity_verified RETURN f.doc_id AS doc_id, f.amount AS amount, f.qualifier AS qualifier, f.verified AS quote_verified, f.evidence AS evidence ORDER BY doc_id, amount",
+    "rows": [
+      {
+        "doc_id": "news-100260918080821054",
+        "amount": "5 viên",
+        "qualifier": "unknown",
+        "quote_verified": true,
+        "evidence": "Cơ quan công an thu giữ một hộp vuông màu xanh chứa 5 viên nén màu trắng. Kết luận giám định xác định số viên nén này là ma túy MDMA."
+      },
+      {
+        "doc_id": "news-100260920221957595",
+        "amount": "hơn 1.000 đầu pod chill",
+        "qualifier": "unknown",
+        "quote_verified": true,
+        "evidence": "Tang vật thu giữ gồm hơn 1.000 đầu pod chill chứa ma túy etomidate"
+      },
+      {
+        "doc_id": "news-100260920221957595",
+        "amount": "khoảng 100g",
+        "qualifier": "approx",
+        "quote_verified": false,
+        "evidence": "Tang vật thu giữ... khoảng 100g ma túy tổng hợp các loại"
+      },
+      {
+        "doc_id": "news-100260920221957595",
+        "amount": "khoảng 100g",
+        "qualifier": "approx",
+        "quote_verified": false,
+        "evidence": "Tang vật thu giữ... khoảng 100g ma túy tổng hợp các loại"
+      },
+      {
+        "doc_id": "news-100260922111804786",
+        "amount": "hơn 1.000 đầu pod chill",
+        "qualifier": "unknown",
+        "quote_verified": false,
+        "evidence": "Tang vật thu giữ gồm hơn 1.000 đầu pod chill chứa ma túy etomidate."
+      },
+      {
+        "doc_id": "news-100260922111804786",
+        "amount": "khoảng 100g",
+        "qualifier": "approx",
+        "quote_verified": false,
+        "evidence": "Tang vật thu giữ khoảng 100g ma túy tổng hợp các loại."
+      },
+      {
+        "doc_id": "news-100260924095400982",
+        "amount": "hơn 1.000 đầu pod chill",
+        "qualifier": "unknown",
+        "quote_verified": false,
+        "evidence": "Công an Thành phố đã thu giữ hơn 1.000 đầu pod chill chứa ma túy etomidate cùng số lượng lớn ma túy tổng hợp các loại."
+      },
+      {
+        "doc_id": "news-100260925144412498",
+        "amount": "hơn 1.000 đầu pod chill",
+        "qualifier": "unknown",
+        "quote_verified": true,
+        "evidence": "Tang vật thu giữ trong chuyên án là hơn 1.000 đầu pod chill chứa etomidate cùng lượng lớn ma túy tổng hợp."
+      },
+      {
+        "doc_id": "news-100260930085028036",
+        "amount": "0,686g",
+        "qualifier": "eq",
+        "quote_verified": false,
+        "evidence": "cơ quan điều tra thu 0,686g ma túy MDMA"
+      },
+      {
+        "doc_id": "news-100261002184934505",
+        "amount": "40kg",
+        "qualifier": "eq",
+        "quote_verified": false,
+        "evidence": "Bộ đội Biên phòng đã triệt phá chuyên án A3-626P, bắt giữ 2 đối tượng và thu giữ 40kg ma túy."
+      }
+    ]
+  },
+  "q4_context": [
+    "Báo cáo [news-100260920221957595] 'Bắt giang hồ 'Hoàng Nato' và 126 người liên quan 8 đường dây ma túy (https://tuoitre.vn/bat-giang-ho-hoang-nato-va-126-nguoi-lien-quan-8-duong-day-ma-tuy-100260920221957595.htm): Công an TP.HCM đã bắt giữ 'Hoàng Nato' và 126 người liên quan đến 8 đường dây ma túy, triệt phá các hoạt động mua bán và tổ chức sử dụng trái phép chất ma túy. Người: Dương Minh Tuấn, Kim Yu Young. Trạng thái riêng: Dương Minh Tuấn: giai đoạn bị bắt, án riêng chưa nêu; Kim Yu Young: giai đoạn bị bắt, án riêng chưa nêu. Bằng chứng chất: Ketamine: khoảng 100g; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ... khoảng 100g ma túy tổng hợp các loại | etomidate: hơn 1.000 đầu pod chill; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ gồm hơn 1.000 đầu pod chill chứa ma túy etomidate | thuốc lắc: khoảng 100g; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ... khoảng 100g ma túy tổng hợp các loại",
+    "Báo cáo [news-100260922111804786] 'TikToker Phannhibeauty bị bắt vì sử dụng ma túy cùng giang hồ 'Hoàng Nato' (https://tuoitre.vn/tiktoker-phannhibeauty-bi-bat-cung-giang-ho-hoang-nato-100260922111804786.htm): TikToker Phannhibeauty bị bắt trong chuyên án liên quan đến tổ chức sử dụng trái phép chất ma túy cùng với giang hồ 'Hoàng Nato'. Người: Dương Minh Tuấn, Phan Kim Nhi. Trạng thái riêng: Dương Minh Tuấn: giai đoạn bị bắt, án riêng chưa nêu; Phan Kim Nhi: giai đoạn bị bắt, án riêng chưa nêu. Bằng chứng chất: etomidate: hơn 1.000 đầu pod chill; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ gồm hơn 1.000 đầu pod chill chứa ma túy etomidate. | ma túy tổng hợp: khoảng 100g; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ khoảng 100g ma túy tổng hợp các loại.",
+    "Báo cáo [news-100260924095400982] 'TikToker Phannhibeauty khai lý do sử dụng pod chill chứa ma túy cùng ‘Hoàng Nato’ (https://tuoitre.vn/tiktoker-phannhibeauty-khai-ly-do-su-dung-podchill-chua-ma-tuy-cung-hoang-nato-100260924095400982.htm): Hoàng Nato và bạn gái Phan Kim Nhi bị bắt khi tổ chức sử dụng ma túy etomidate ngụy trang trong thuốc lá điện tử. Người: Dương Minh Tuấn, Phan Kim Nhi. Trạng thái riêng: Dương Minh Tuấn: giai đoạn bị bắt, án riêng chưa nêu; Phan Kim Nhi: giai đoạn bị bắt, án riêng chưa nêu. Bằng chứng chất: etomidate: hơn 1.000 đầu pod chill; chủ thể: chưa quy cho người cụ thể; trích: Công an Thành phố đã thu giữ hơn 1.000 đầu pod chill chứa ma túy etomidate cùng số lượng lớn ma túy tổng hợp các loại.",
+    "Báo cáo [news-100260925144412498] 'Công an TP.HCM và 10 ngày đêm ròng rã bắt ‘Hoàng Nato’, triệt phá 8 đường dây ma túy (https://tuoitre.vn/cong-an-tphcm-va-10-ngay-dem-rong-ra-bat-hoang-nato-triet-pha-8-duong-day-ma-tuy-100260925144412498.htm): Công an TP.HCM đã bắt giữ Dương Minh Tuấn (tức 'Hoàng Nato') và Phan Kim Nhi, triệt phá 8 đường dây ma túy liên quan đến việc sử dụng và mua bán trái phép chất ma túy etomidate. Người: Dương Minh Tuấn, Phan Kim Nhi. Trạng thái riêng: Dương Minh Tuấn: giai đoạn bắt giữ, án riêng chưa nêu; Phan Kim Nhi: giai đoạn bắt giữ, án riêng chưa nêu. Bằng chứng chất: etomidate: hơn 1.000 đầu pod chill; chủ thể: chưa quy cho người cụ thể; trích: Tang vật thu giữ trong chuyên án là hơn 1.000 đầu pod chill chứa etomidate cùng lượng lớn ma túy tổng hợp.",
+    "[news-100260920221957595] Dương Minh Tuấn: vai trò nghi phạm; giai đoạn bị bắt; tội riêng tổ chức sử dụng trái phép chất ma túy; án nguồn chưa nêu án. Bằng chứng: \"Hoàng Nato\" bị bắt về hành vi tổ chức sử dụng trái phép chất ma túy",
+    "[news-100260922111804786] Dương Minh Tuấn: vai trò nghi phạm; giai đoạn bị bắt; tội riêng tổ chức sử dụng trái phép chất ma túy; án nguồn chưa nêu án. Bằng chứng: Phan Kim Nhi là bạn và bị bắt do liên quan hành vi của Dương Minh Tuấn (43 tuổi, tức 'Hoàng Nato').",
+    "[news-100260924095400982] Dương Minh Tuấn: vai trò nghi phạm; giai đoạn bị bắt; tội riêng tổ chức sử dụng trái phép chất ma túy; án nguồn chưa nêu án. Bằng chứng: \"Hoàng Nato\" khai lần đầu tiên sử dụng pod chill chứa etomidate là vào ngày 7-9, khi đó Hoàng đến nhà bạn gái là Phan Kim Nhi chơi.",
+    "[news-100260925144412498] Dương Minh Tuấn: vai trò nghi phạm; giai đoạn bắt giữ; tội riêng tổ chức sử dụng trái phép chất ma túy; án nguồn chưa nêu án. Bằng chứng: Ban chuyên án đã chặt đứt 8 đường dây tội phạm, bắt và xử lý 126 người liên quan đến các hành vi mua bán, tàng trữ, tổ chức sử dụng và sử dụng trái phép chất ma túy.",
+    "Khung cao nhất [Điều 255 BLHS khoản 4]: phạt tù 20 năm hoặc tù chung thân; khác khung cơ bản, chưa khẳng định bị can đã chịu mức này.",
+    "[Điều 255 BLHS - Tội tổ chức sử dụng trái phép chất ma túy] khoản 1: 1. Người nào tổ chức sử dụng trái phép chất ma túy dưới bất kỳ hình thức nào, thì bị phạt tù từ 02 năm đến 07 năm.",
+    "[Điều 255 BLHS - Tội tổ chức sử dụng trái phép chất ma túy] khoản 4: 4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm hoặc tù chung thân:\n\na) Gây tổn hại cho sức khỏe của 02 người trở lên mà tỷ lệ tổn thương cơ thể của mỗi người 61% trở lên;\n\nb) Làm chết 02 người trở lên."
+  ],
+  "q6_context_without_vector": [
+    "Danh sách đầy đủ theo graph: 4 báo cáo nguồn liên quan MDMA. Bao phủ mọi báo cáo; chỉ gộp thành cùng vụ khi ngữ cảnh chứng minh, giữ nguồn.",
+    "Báo cáo [news-100260917203001265] 'Từ mối quen biết tại nhà hàng ở Berlin đến những kiện hàng chứa hơn 10kg ma túy về Việt Nam (https://tuoitre.vn/tu-moi-quen-biet-tai-nha-hang-o-berlin-den-nhung-kien-hang-chua-hon-10kg-ma-tuy-ve-viet-nam-100260917203001265.htm): Cái Quang Huy bị cáo buộc hai lần vận chuyển ma túy từ Đức về Việt Nam, trong khi Nguyễn Tiến Đạt bị truy tố vì nhận hàng chứa ma túy. Người: Cái Quang Huy, Nguyễn Tiến Đạt. Trạng thái riêng: Cái Quang Huy: giai đoạn truy nã, án riêng chưa nêu; Nguyễn Tiến Đạt: giai đoạn bị truy tố, án riêng chưa nêu. Bằng chứng chất: MDMA: gần 4,3kg; chủ thể: chưa quy cho người cụ thể; trích: Kết quả giám định xác định toàn bộ số viên nén này là MDMA, tổng khối lượng gần 4,3kg. | MDMA: hơn 9,6kg; chủ thể: Cái Quang Huy; trích: Tổng khối lượng ma túy Huy phải chịu trách nhiệm hình sự là hơn 9,6kg ma túy MDMA và khoảng 406g Ketamine. Nguyễn Tiến Đạt phải chịu trách nhiệm hình sự đối với gần 4,3kg MDMA. | MDMA: hơn 5,3kg; chủ thể: Nguyễn Hữu Đức; trích: Kết quả giám định xác định số viên nén hình tam giác màu hồng - xám là MDMA, tổng khối lượng hơn 5,3kg.",
+    "Báo cáo [news-100260918080821054] 'Góp 14 triệu đồng mua ma túy rồi nói đã ‘rút lui’, 3 thanh niên kháng cáo kêu oan (https://tuoitre.vn/gop-14-trieu-dong-mua-ma-tuy-roi-noi-da-rut-lui-3-thanh-nien-khang-cao-keu-oan-100260918080821054.htm): Ba thanh niên góp tiền để Lê Minh Thành mua ma túy dùng trong tiệc sinh nhật nhưng cho rằng họ không tiếp tục tham gia. Tòa sơ thẩm xác định cả ba là đồng phạm, tuyên mỗi người 2 năm tù về tội mua bán trái phép chất ma túy. Người: Kim Xuân Tuấn, Lê Minh Thành, Nguyễn Quang Hưng, Trịnh Vũ Kiên. Trạng thái riêng: Kim Xuân Tuấn: giai đoạn đã tuyên án, án riêng 24 tháng tù; Lê Minh Thành: giai đoạn đã tuyên án, án riêng 36 tháng tù; Nguyễn Quang Hưng: giai đoạn đã tuyên án, án riêng 24 tháng tù; Trịnh Vũ Kiên: giai đoạn đã tuyên án, án riêng 24 tháng tù. Bằng chứng chất: MDMA: 5 viên; chủ thể: Lê Minh Thành; trích: Cơ quan công an thu giữ một hộp vuông màu xanh chứa 5 viên nén màu trắng. Kết luận giám định xác định số viên nén này là ma túy MDMA.",
+    "Báo cáo [news-100260924105118645] 'Cách bà ‘trùm’ thao túng 39 bác sĩ, điều dưỡng, biến Viện Pháp y tâm thần thành ‘chốn trú ẩn’ của tội phạm (https://tuoitre.vn/cach-ba-trum-thao-tung-39-bac-si-dieu-duong-bien-vien-phap-y-tam-than-thanh-chon-tru-an-cua-toi-pham-100260924105118645.htm): Vụ án liên quan đến việc thao túng và nhận hối lộ tại Viện Pháp y tâm thần Trung ương, trong đó nhiều bác sĩ và nhân viên y tế bị cáo buộc nhận tiền để làm ngơ cho các bị can ma túy ra ngoài và chi tiền 'chạy' giám định tâm thần. Người: Lê Văn Đông, Nguyễn Thị Mai Anh, Trần Quốc An, Trần Văn Trường. Trạng thái riêng: Lê Văn Đông: giai đoạn đang bị điều tra, án riêng chưa nêu; Nguyễn Thị Mai Anh: giai đoạn đang bị điều tra, án riêng chưa nêu; Trần Quốc An: giai đoạn đang bị điều tra, án riêng chưa nêu; Trần Văn Trường: giai đoạn đang bị điều tra, án riêng chưa nêu. Bằng chứng chất: MDMA: nguồn không nêu lượng; chủ thể: Nguyễn Thị Mai Anh; trích: Khi khám xét phòng của vợ chồng Mai Anh trong viện, công an tiếp tục thu giữ MDMA.",
+    "Báo cáo [news-100260930085028036] 'Bệnh nhân ‘tâm thần’ kể cuộc chơi ma túy trên bãi biển cùng điều dưỡng Viện Pháp y tâm thần (https://tuoitre.vn/benh-nhan-tam-than-ke-cuoc-choi-ma-tuy-tren-bai-bien-cung-dieu-duong-vien-phap-y-tam-than-100260930085028036.htm): Lê Văn Đông, trong thời gian chữa bệnh bắt buộc tại Viện Pháp y tâm thần Trung ương, đã tổ chức sử dụng ma túy trên bãi biển Sầm Sơn cùng với một số người khác. Người: Cao Thị Bích Hằng, Lê Văn Đông, Nguyễn Thị Mai Anh, Ngô Việt Dũng, Trần Quốc An. Trạng thái riêng: Cao Thị Bích Hằng: giai đoạn xét xử, án riêng chưa nêu; Lê Văn Đông: giai đoạn xét xử, án riêng chưa nêu; Nguyễn Thị Mai Anh: giai đoạn xét xử, án riêng chưa nêu; Ngô Việt Dũng: giai đoạn xét xử, án riêng chưa nêu; Trần Quốc An: giai đoạn xét xử, án riêng chưa nêu. Bằng chứng chất: MDMA: 0,686g; chủ thể: Lê Văn Đông; trích: cơ quan điều tra thu 0,686g ma túy MDMA"
+  ],
+  "q5_context": [
+    "Báo cáo [news-100260917203001265] 'Từ mối quen biết tại nhà hàng ở Berlin đến những kiện hàng chứa hơn 10kg ma túy về Việt Nam (https://tuoitre.vn/tu-moi-quen-biet-tai-nha-hang-o-berlin-den-nhung-kien-hang-chua-hon-10kg-ma-tuy-ve-viet-nam-100260917203001265.htm): Cái Quang Huy bị cáo buộc hai lần vận chuyển ma túy từ Đức về Việt Nam, trong khi Nguyễn Tiến Đạt bị truy tố vì nhận hàng chứa ma túy. Người: Cái Quang Huy, Nguyễn Tiến Đạt. Trạng thái riêng: Cái Quang Huy: giai đoạn truy nã, án riêng chưa nêu; Nguyễn Tiến Đạt: giai đoạn bị truy tố, án riêng chưa nêu. Bằng chứng chất: Ketamine: khoảng 406g; chủ thể: Cái Quang Huy; trích: Tổng khối lượng ma túy Huy phải chịu trách nhiệm hình sự là hơn 9,6kg ma túy MDMA và khoảng 406g Ketamine. Nguyễn Tiến Đạt phải chịu trách nhiệm hình sự đối với gần 4,3kg MDMA. | Ketamine: hơn 405g; chủ thể: Nguyễn Hữu Đức; trích: Số tinh thể màu trắng là ma túy Ketamine, tổng khối lượng hơn 405g. | MDMA: gần 4,3kg; chủ thể: chưa quy cho người cụ thể; trích: Kết quả giám định xác định toàn bộ số viên nén này là MDMA, tổng khối lượng gần 4,3kg. | MDMA: hơn 9,6kg; chủ thể: Cái Quang Huy; trích: Tổng khối lượng ma túy Huy phải chịu trách nhiệm hình sự là hơn 9,6kg ma túy MDMA và khoảng 406g Ketamine. Nguyễn Tiến Đạt phải chịu trách nhiệm hình sự đối với gần 4,3kg MDMA. | MDMA: hơn 5,3kg; chủ thể: Nguyễn Hữu Đức; trích: Kết quả giám định xác định số viên nén hình tam giác màu hồng - xám là MDMA, tổng khối lượng hơn 5,3kg.",
+    "[news-100260917203001265] Cái Quang Huy: vai trò bị cáo; giai đoạn truy nã; tội riêng vận chuyển trái phép chất ma túy; án nguồn chưa nêu án. Bằng chứng: Huy phải chịu trách nhiệm hình sự tổng số ma túy gồm hơn 9,6kg MDMA và gần 406g Ketamine.",
+    "So ngưỡng trực tiếp [Điều 250 BLHS khoản 4 điểm b]: MDMA hơn 9,6kg = giá trị/ngưỡng 9600 gam; người Cái Quang Huy. Quy tắc: b) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;. Đây là đối chiếu ngưỡng từ corpus, không phải phán quyết thực tế.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 1: 1. Người nào vận chuyển trái phép chất ma túy mà không nhằm mục đích sản xuất, mua bán, tàng trữ trái phép chất ma túy thuộc một trong các trường hợp sau đây, thì bị phạt tù từ 02 năm đến 07 năm:\n\na) Đã bị xử phạt vi phạm hành chính về hành vi quy định tại Điều này hoặc đã bị kết án về tội này hoặc một trong các tội quy định tại các điều 248, 249, 251 và 252 của Bộ luật này, chưa được xóa án tích mà còn vi phạm;\n\nb) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng từ 01 gam đến dưới 500 gam;\n\nc) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng từ 0,1 gam đến dưới 05 gam;\n\nd) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\nđ) Quả thuốc phiện khô có khối lượng từ 05 kilôgam đến dưới 50 kilôgam;\n\ne) Quả thuốc phiện tươi có khối lượng từ 01 kilôgam đến dưới 10 kilôgam;\n\ng) Các chất ma túy khác ở thể rắn có khối lượng từ 01 gam đến dưới 20 gam;\n\nh) Các chất ma túy khác ở thể lỏng có thể tích từ 10 mililít đến dưới 100 mililít;\n\ni) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm b đến điểm h khoản này.",
+    "[Điều 250 BLHS - Tội vận chuyển trái phép chất ma túy] khoản 4: 4. Phạm tội thuộc một trong các trường hợp sau đây, thì bị phạt tù 20 năm, tù chung thân hoặc tử hình:\n\na) Nhựa thuốc phiện, nhựa cần sa hoặc cao côca có khối lượng 05 kilôgam trở lên;\n\nb) Heroine, Cocaine, Methamphetamine, Amphetamine, MDMA hoặc XLR-11 có khối lượng 100 gam trở lên;\n\nc) Lá cây côca; lá khát (lá cây Catha edulis); lá, rễ, thân, cành, hoa, quả của cây cần sa hoặc bộ phận của cây khác có chứa chất ma túy do Chính phủ quy định có khối lượng 75 kilôgam trở lên;\n\nd) Quả thuốc phiện khô có khối lượng 600 kilôgam trở lên;\n\nđ) Quả thuốc phiện tươi có khối lượng 150 kilôgam trở lên;\n\ne) Các chất ma túy khác ở thể rắn có khối lượng 300 gam trở lên;\n\ng) Các chất ma túy khác ở thể lỏng có thể tích 750 mililít trở lên;\n\nh) Có 02 chất ma túy trở lên mà tổng khối lượng hoặc thể tích của các chất đó tương đương với khối lượng hoặc thể tích chất ma túy quy định tại một trong các điểm từ điểm a đến điểm g khoản này."
+  ],
+  "stats": {
+    "nodes": 360,
+    "relationships": 691
+  }
+}

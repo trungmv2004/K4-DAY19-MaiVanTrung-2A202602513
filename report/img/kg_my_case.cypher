@@ -1,0 +1,1 @@
+MATCH p=(:Person {name:'Trần Thanh Tuấn'})-[:HAS_PARTICIPATION]->(:Participation)-[:ACCUSED_OF]->(:Crime)<-[:DEFINES]-(:Article) MATCH q=(:Participation)-[:IN_REPORT]->(:CaseReport) WHERE nodes(q)[0]=nodes(p)[1] RETURN p,q;

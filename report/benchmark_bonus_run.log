@@ -1,0 +1,26 @@
+[provider] chat = openrouter:openai/gpt-4o-mini | embedding = openrouter:openai/text-embedding-3-small
+Q1 flat  recall=1.00 2.45s $0.00012
+Q1 graph recall=1.00 2.63s $0.00041
+Q2 flat  recall=1.00 2.52s $0.00014
+Q2 graph recall=1.00 2.99s $0.00062
+Q3 flat  recall=0.00 2.00s $0.00008
+Q3 graph recall=1.00 2.87s $0.00037
+Q4 flat  recall=0.00 2.25s $0.00007
+Q4 graph recall=1.00 3.01s $0.00075
+Q5 flat  recall=0.60 2.96s $0.00016
+Q5 graph recall=1.00 4.51s $0.00051
+Q6 flat  recall=0.00 2.40s $0.00018
+Q6 graph recall=1.00 4.23s $0.00052
+Chat model: openrouter:openai/gpt-4o-mini | Embedding: openrouter:openai/text-embedding-3-small | top_k=3 | chunk_size=800 | chunks=176 | KG: 360 nodes / 691 rels
+
+== Indexing (one-off)
+pipeline  calls    in_tok  out_tok       USD  seconds
+flat        176     56072        0   0.00112    104.7
+graph       196     94311     7655   0.01145    204.6
+
+== Querying (mean per question)
+pipeline  recall  judge   in_tok  out_tok       USD  seconds
+flat        0.43   1.00      694       47   0.00013     2.43
+graph       1.00   1.83     3172      103   0.00053     3.37
+
+Saved ket_qua_benchmark_kg.txt

@@ -1,0 +1,4 @@
+# Optional tools for capturing the three Neo4j Browser screenshots on Windows.
+-r requirements.txt
+playwright==1.63.0
+pillow==12.3.0

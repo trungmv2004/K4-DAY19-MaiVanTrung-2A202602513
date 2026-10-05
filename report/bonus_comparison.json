@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-05",
+  "baseline_preserved_byte_for_byte": true,
+  "sha256": {
+    "ket_qua_benchmark_kg.hint.txt": "3929325c471017bae202d20f8f3f3386aca6de1c2e054f7c1502f796f33afd1d",
+    "ket_qua_benchmark_kg.txt": "e831e5e829140d7d5586327ffede14bdfdd0d27435e5fea2580d271d2e17c7b0",
+    "src/hint_graph.py": "631e81acc54dd219ce5b51ca14d7a63b9f27182fb662af30df8f75a71b7e01dc",
+    "src/graph.py": "a5a410dc01a26b5af02b3885bae7923e5736950bccbfd398b5ba4cdae12b44d5",
+    "src/legal_evidence.py": "614dcd040c2189b0ad4bb8484dc42807cadc96eed7df79109a343921c7b7ca32"
+  },
+  "hint_header": "Chat model: openrouter:openai/gpt-4o-mini | Embedding: openrouter:openai/text-embedding-3-small | top_k=3 | chunk_size=800 | chunks=176 | KG: 200 nodes / 380 rels",
+  "bonus_header": "Chat model: openrouter:openai/gpt-4o-mini | Embedding: openrouter:openai/text-embedding-3-small | top_k=3 | chunk_size=800 | chunks=176 | KG: 360 nodes / 691 rels",
+  "indexing": {
+    "hint": {
+      "calls": 196.0,
+      "input": 91958.0,
+      "output": 4647.0,
+      "usd": 0.00929,
+      "seconds": 186.4
+    },
+    "bonus": {
+      "calls": 196.0,
+      "input": 94311.0,
+      "output": 7655.0,
+      "usd": 0.01145,
+      "seconds": 204.6
+    }
+  },
+  "querying": {
+    "hint": {
+      "recall": 0.89,
+      "judge": 1.67,
+      "input": 4426.0,
+      "output": 80.0,
+      "usd": 0.00071,
+      "seconds": 3.18
+    },
+    "bonus": {
+      "recall": 1.0,
+      "judge": 1.83,
+      "input": 3172.0,
+      "output": 103.0,
+      "usd": 0.00053,
+      "seconds": 3.37
+    }
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "hint": {
+        "type": "single-hop-law",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 2.2,
+        "answer": "Theo Luật Phòng, chống ma túy 2021, tiền chất là hóa chất không thể thiếu được trong quá trình điều chế, sản xuất chất ma túy được quy định trong danh mục tiền chất do Chính phủ ban hành. (Xem Điều 2, khoản 4)."
+      },
+      "bonus": {
+        "type": "single-hop-law",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 2.63,
+        "answer": "Theo Điều 2 khoản 4 của Luật Phòng, chống ma túy 2021, tiền chất là hóa chất không thể thiếu được trong quá trình điều chế, sản xuất chất ma túy được quy định trong danh mục tiền chất do Chính phủ ban hành."
+      }
+    },
+    {
+      "id": "Q2",
+      "hint": {
+        "type": "single-hop-news",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 2.13,
+        "answer": "Trong vụ đường dây mua bán hơn 36kg ma túy bị TAND TP.HCM xét xử ngày 28-9, hai bị cáo lãnh án tử hình là Trần Thanh Tuấn và Trần Minh Tâm."
+      },
+      "bonus": {
+        "type": "single-hop-news",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 2.99,
+        "answer": "Trong vụ đường dây mua bán hơn 36kg ma túy bị TAND TP.HCM xét xử ngày 28-9, hai bị cáo lãnh án tử hình là Trần Thanh Tuấn (25 tuổi) và Trần Minh Tâm (32 tuổi)."
+      }
+    },
+    {
+      "id": "Q3",
+      "hint": {
+        "type": "cross-kb",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 4.49,
+        "answer": "Lê Minh Thành bị tuyên 36 tháng tù về tội mua bán trái phép chất ma túy, được quy định tại Điều 251 của Bộ luật Hình sự với khung hình phạt cơ bản từ 02 năm đến 07 năm."
+      },
+      "bonus": {
+        "type": "cross-kb",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 2.87,
+        "answer": "Lê Minh Thành bị tuyên 36 tháng tù về tội mua bán trái phép chất ma túy. Tội này được quy định tại Điều 251 của Bộ luật Hình sự với khung hình phạt cơ bản từ 02 năm đến 07 năm."
+      }
+    },
+    {
+      "id": "Q4",
+      "hint": {
+        "type": "cross-kb",
+        "recall": 0.67,
+        "judge": 1,
+        "seconds": 2.53,
+        "answer": "Giang hồ 'Hoàng Nato' bị bắt về hành vi tổ chức sử dụng trái phép chất ma túy. Hành vi này có thể bị phạt tù tối đa 7 năm theo Điều 255 Bộ luật Hình sự."
+      },
+      "bonus": {
+        "type": "cross-kb",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 3.01,
+        "answer": "Giang hồ 'Hoàng Nato' (Dương Minh Tuấn) bị bắt về hành vi tổ chức sử dụng trái phép chất ma túy. Hành vi này có thể bị phạt tù tối đa 20 năm hoặc tù chung thân theo khoản 4 Điều 255 Bộ luật Hình sự."
+      }
+    },
+    {
+      "id": "Q5",
+      "hint": {
+        "type": "cross-kb-multi-hop",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 3.34,
+        "answer": "Cái Quang Huy bị truy tố về tội vận chuyển trái phép chất ma túy với loại ma túy là MDMA. Với khối lượng MDMA là hơn 9,6kg, điều luật tương ứng được áp dụng là Điều 250 BLHS, khoản 4. Khung hình phạt cho tội này là từ 20 năm, tù chung thân hoặc tử hình."
+      },
+      "bonus": {
+        "type": "cross-kb-multi-hop",
+        "recall": 1.0,
+        "judge": 2,
+        "seconds": 4.51,
+        "answer": "Cái Quang Huy bị truy tố về tội vận chuyển trái phép chất ma túy với loại ma túy là MDMA. Với khối lượng MDMA hơn 9,6kg trong vụ này, khoản 4 điểm b của Điều 250 Bộ luật Hình sự (BLHS) tương ứng được áp dụng, quy định rằng phạm tội thuộc trường hợp có khối lượng MDMA 100 gam trở lên. Khung hình phạt áp dụng là từ 20 năm tù, tù chung thân hoặc tử hình."
+      }
+    },
+    {
+      "id": "Q6",
+      "hint": {
+        "type": "aggregation",
+        "recall": 0.67,
+        "judge": 1,
+        "seconds": 4.39,
+        "answer": "Các vụ việc trong tin tức có liên quan đến ma túy MDMA bao gồm:\n\n1. **Vụ vận chuyển ma túy từ Đức về Việt Nam**: Cái Quang Huy bị cáo buộc vận chuyển hơn 9,6kg MDMA.\n2. **Vụ góp tiền mua ma túy tại Hà Nội**: Ba thanh niên góp tiền để Lê Minh Thành mua 5 viên MDMA cho tiệc sinh nhật.\n3. **Vụ vận chuyển ma túy của Cái Quang Huy**: Cái Quang Huy cũng bị cáo buộc vận chuyển hơn 9,6kg MDMA.\n4. **Vụ tổ chức sử dụng ma túy tại Sầm Sơn**: Tại đây, cơ quan điều tra thu giữ 0,686g MDMA.\n\nTất cả các vụ việc này đều có liên quan đến ma túy MDMA."
+      },
+      "bonus": {
+        "type": "aggregation",
+        "recall": 1.0,
+        "judge": 1,
+        "seconds": 4.23,
+        "answer": "Có 4 vụ việc trong tin tức liên quan đến ma túy MDMA:\n\n1. **Vụ Cái Quang Huy và Nguyễn Tiến Đạt**: Cái Quang Huy bị cáo buộc vận chuyển hơn 9,6kg MDMA và gần 4,3kg MDMA liên quan đến Nguyễn Tiến Đạt. (Báo cáo [news-100260917203001265])\n\n2. **Vụ Lê Minh Thành**: Lê Minh Thành bị bắt quả tang khi mang theo 5 viên MDMA để bán. (Báo cáo [news-100260918080821054])\n\n3. **Vụ Lê Văn Đông**: Lê Văn Đông bị phát hiện có 0,686g MDMA trong phòng chữa bệnh tại Viện Pháp y tâm thần. (Báo cáo [news-100260930085028036])\n\n4. **Vụ Nguyễn Hữu Đức**: Mặc dù không bị truy tố do không đủ chứng cứ chứng minh đồng phạm, nhưng có liên quan đến việc vận chuyển hơn 5,3kg MDMA. (Báo cáo [news-100260917203001265]) \n\nCác vụ việc này đều có liên quan đến chất ma túy MDMA và được nêu rõ trong các báo cáo nguồn."
+      }
+    }
+  ],
+  "comparison_scope": "Complete pipelines, including ontology/extraction/teaser preprocessing/retrieval/prompt; one run per final pipeline."
+}
